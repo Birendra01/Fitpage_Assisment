@@ -1,3 +1,5 @@
+const Review = require('../models/Review');
+ 
 exports.getAllReviews = async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
@@ -59,10 +61,12 @@ exports.createReview = async (req, res, next) => {
 };
 
 exports.getReviewById = async (req, res, next) => {
+    
     const id = req.params.id;
 
     try {
         const review = await Review.findById(id);
+        
         if (!review) {
             return res.status(404).json({ message: 'Review not found' });
         }

@@ -10,13 +10,13 @@ const reviewController = require('./controllers/reviewController');
 const Review = require('./models/Review');
 const User = require('./models/User');
 
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -78,3 +78,4 @@ app.post('/api/reviews/:id/response', authMiddleware, reviewController.addRespon
 
 // Error handling middleware
 app.use(errorHandler);
+
